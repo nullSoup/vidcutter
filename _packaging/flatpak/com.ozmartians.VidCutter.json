@@ -1,7 +1,7 @@
 {
     "app-id": "com.ozmartians.VidCutter",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.10",
+    "runtime-version": "5.11",
     "sdk": "org.kde.Sdk",
     "command": "vidcutter",
     "finish-args": [
@@ -40,7 +40,7 @@
         ],
         "sources": [{
             "type": "archive",
-            "url": "https://pypi.python.org/packages/9c/1d/4544708aaa89f26c97cc09450bb333a23724a320923e74d73e028b3560f9/PyOpenGL-3.1.0.tar.gz",
+            "url": "https://files.pythonhosted.org/packages/9c/1d/4544708aaa89f26c97cc09450bb333a23724a320923e74d73e028b3560f9/PyOpenGL-3.1.0.tar.gz",
             "sha256": "9b47c5c3a094fa518ca88aeed35ae75834d53e4285512c61879f67a48c94ddaf"
         }]
     },
@@ -52,8 +52,8 @@
         ],
         "sources": [{
             "type": "archive",
-            "url": "https://pypi.python.org/packages/0d/3f/3a16847fe5c010110a8f54dd8fe7b091b4e22922def374fe1cce9c1cb7e9/simplejson-3.13.2.tar.gz",
-            "sha256": "4c4ecf20e054716cc1e5a81cadc44d3f4027108d8dd0861d8b1e3bd7a32d4f0a"
+            "url": "https://files.pythonhosted.org/packages/e3/24/c35fb1c1c315fc0fffe61ea00d3f88e85469004713dab488dee4f35b0aff/simplejson-3.16.0.tar.gz",
+            "sha256": "b1f329139ba647a9548aa05fb95d046b4a677643070dc2afc05fa2e975d09ca5"
         }]
     },
     {
@@ -68,21 +68,21 @@
         ],
         "sources": [{
             "type": "archive",
-            "url": "https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.10.1/PyQt5_gpl-5.10.1.tar.gz",
-            "sha256": "9932e971e825ece4ea08f84ad95017837fa8f3f29c6b0496985fa1093661e9ef"
+            "url": "https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.tar.gz",
+            "sha256": "c9b57d15601d436faf35dacf8e0acefa220194829a653e771e80b189b3261073"
         }],
           "modules": [{
             "name": "sip",
             "buildsystem": "simple",
             "build-commands": [
-                "python3 configure.py -b ${FLATPAK_DEST}/bin -d ${FLATPAK_DEST}/lib/python3.5/site-packages -e ${FLATPAK_DEST}/include -v ${FLATPAK_DEST}/share/sip --stubsdir=${FLATPAK_DEST}/lib/python3.5/site-packages",
+                "python3 configure.py --sip-module PyQt5.sip -b ${FLATPAK_DEST}/bin -d ${FLATPAK_DEST}/lib/python3.5/site-packages -e ${FLATPAK_DEST}/include -v ${FLATPAK_DEST}/share/sip --stubsdir=${FLATPAK_DEST}/lib/python3.5/site-packages",
                 "make",
                 "make install"
             ],
             "sources": [{
                 "type": "archive",
-                "url": "https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.8/sip-4.19.8.tar.gz",
-                "sha256": "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
+                "url": "https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz",
+                "sha256": "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
             }]
         }]
     }, 
@@ -97,13 +97,13 @@
         ],
         "sources": [{
             "type": "archive",
-            "url": "https://github.com/mpv-player/mpv/archive/v0.28.2.tar.gz",
-            "sha256": "aada14e025317b5b3e8e58ffaf7902e8b6e4ec347a93d25a7c10d3579426d795"
+            "url": "https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz",
+            "sha256": "f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623"
         },
         {
             "type": "file",
-            "url": "https://waf.io/waf-1.9.8",
-            "sha256": "167dc42bab6d5bd823b798af195420319cb5c9b571e00db7d83df2a0fe1f4dbf",
+            "url": "https://waf.io/waf-2.0.12",
+            "sha256": "0979ca87f45928e0d752049ab2f43be8551249be73dc5563b944ec54f8871d1f",
             "dest-filename": "waf"
         }],
         "modules": [{
@@ -133,32 +133,119 @@
         {
             "name": "ffmpeg",
             "cleanup": ["/include", "/lib/pkgconfig", "/share/ffmpeg/examples"],
-            "config-opts": [
-                "--enable-shared",
-                "--disable-static",
-                "--disable-debug",
-                "--enable-gnutls",
-                "--disable-doc",
-                "--disable-ffplay",
-                "--enable-gpl",
-                "--enable-libass",
-                "--enable-libfribidi",
-                "--enable-libmp3lame",
-                "--enable-libpulse",
-                "--enable-libtheora",
-                "--enable-libvorbis",
-                "--enable-libvpx",
-                "--enable-libx264",
-                "--enable-libx265",
-                "--enable-libxvid",
-                "--enable-version3"
-            ],
+            "build-options": {
+                "arch": {
+                    "aarch64": {
+                        "config-opts": [
+                            "--enable-shared",
+                            "--disable-static",
+                            "--disable-debug",
+                            "--enable-gnutls",
+                            "--disable-doc",
+                            "--disable-ffplay",
+                            "--enable-gpl",
+                            "--enable-libass",
+                            "--enable-libfribidi",
+                            "--enable-libmp3lame",
+                            "--enable-libpulse",
+                            "--enable-libtheora",
+                            "--enable-libvorbis",
+                            "--enable-libvpx",
+                            "--enable-libx264",
+                            "--enable-libx265",
+                            "--enable-libxvid",
+                            "--enable-version3"
+                        ]
+                    },
+                    "arm": {
+                        "config-opts": [
+                            "--enable-shared",
+                            "--disable-static",
+                            "--disable-debug",
+                            "--enable-gnutls",
+                            "--disable-doc",
+                            "--disable-ffplay",
+                            "--enable-gpl",
+                            "--enable-libass",
+                            "--enable-libfribidi",
+                            "--enable-libmp3lame",
+                            "--enable-libpulse",
+                            "--enable-libtheora",
+                            "--enable-libvorbis",
+                            "--enable-libvpx",
+                            "--enable-libx264",
+                            "--enable-libx265",
+                            "--enable-libxvid",
+                            "--enable-version3"
+                        ]
+                    },
+                    "i386": {
+                        "config-opts": [
+                            "--enable-shared",
+                            "--disable-static",
+                            "--disable-debug",
+                            "--enable-gnutls",
+                            "--disable-doc",
+                            "--disable-ffplay",
+                            "--enable-gpl",
+                            "--enable-libass",
+                            "--enable-libfribidi",
+                            "--enable-libmp3lame",
+                            "--enable-libpulse",
+                            "--enable-libtheora",
+                            "--enable-libvorbis",
+                            "--enable-libvpx",
+                            "--enable-libx264",
+                            "--enable-libx265",
+                            "--enable-libxvid",
+                            "--enable-nvdec",
+                            "--enable-version3"
+                        ]
+                    },
+                    "x86_64": {
+                        "config-opts": [
+                            "--enable-shared",
+                            "--disable-static",
+                            "--disable-debug",
+                            "--enable-gnutls",
+                            "--disable-doc",
+                            "--disable-ffplay",
+                            "--enable-gpl",
+                            "--enable-libass",
+                            "--enable-libfribidi",
+                            "--enable-libmp3lame",
+                            "--enable-libpulse",
+                            "--enable-libtheora",
+                            "--enable-libvorbis",
+                            "--enable-libvpx",
+                            "--enable-libx264",
+                            "--enable-libx265",
+                            "--enable-libxvid",
+                            "--enable-nvdec",
+                            "--enable-version3"
+                        ]
+                    }
+                }
+            },
             "sources": [{
                 "type": "archive",
-                "url": "https://ffmpeg.org/releases/ffmpeg-4.0.tar.xz",
-                "sha256": "ed945daf40b124e77a685893cc025d086f638bc703183460aff49508edb3a43f"
+                "url": "http://ffmpeg.org/releases/ffmpeg-4.1.tar.xz",
+                "sha256": "a38ec4d026efb58506a99ad5cd23d5a9793b4bf415f2c4c2e9c1bb444acd1994"
             }],     
             "modules": [{
+                "name": "ffnvcodec",
+                "only-arches": ["i386", "x86_64"],
+                "buildsystem": "simple",
+                "build-commands": [
+                    "make",
+                    "make install PREFIX=${FLATPAK_DEST}"
+                ],
+                "sources": [{
+                    "type": "git",
+                    "url": "https://git.videolan.org/git/ffmpeg/nv-codec-headers.git"
+                }]
+            },
+            {
                 "name": "xvid",
                 "subdir": "build/generic",
                 "sources": [{
@@ -242,7 +329,7 @@
                 ],
                 "sources": [{
                     "type": "git",
-                    "commit": "e9a5903edf8ca59ef20e6f4894c196f135af735e",
+                    "commit": "545de2ffec6ae9a80738de1b2c8cf820249a2530",
                     "url": "https://git.videolan.org/git/x264.git"
                 }]
             },
@@ -273,8 +360,8 @@
                 ],
                 "sources": [{
                     "type": "archive",
-                    "url": "https://bitbucket.org/multicoreware/x265/downloads/x265_2.8.tar.gz",
-                    "sha256": "6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863"
+                    "url": "https://bitbucket.org/multicoreware/x265/downloads/x265_2.9.tar.gz",
+                    "sha256": "ebae687c84a39f54b995417c52a2fdde65a4e2e7ebac5730d251471304b91024"
                 },
                 {
                     "type": "patch",
@@ -360,7 +447,7 @@
         "sources": [{
             "type": "git",
             "branch": "flatpak",
-            "commit": "2b29605228ab6c2329efdfda410c756337e421e6",
+            "commit": "ae390c459111470183cbcdfac75e85b6bb8b57a3",
             "url": "https://github.com/ozmartian/vidcutter.git"
         }]
     }]

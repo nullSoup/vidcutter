@@ -23,8 +23,7 @@
 import sys
 
 from PyQt5.QtCore import QFile, QSize, QTextStream, Qt
-from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QLabel, QScrollArea, QSizePolicy, QStyleFactory, QVBoxLayout,
-                             qApp)
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QLabel, QScrollArea, QStyleFactory, QVBoxLayout, qApp
 
 
 class Changelog(QDialog):
